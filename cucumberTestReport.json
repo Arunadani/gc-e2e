@@ -1,0 +1,64 @@
+[
+  {
+    "keyword": "Feature",
+    "name": "gc-e2e Test",
+    "line": 1,
+    "id": "gc-e2e-test",
+    "tags": [],
+    "uri": "features\\openHome.feature",
+    "elements": [
+      {
+        "id": "gc-e2e-test;homepage",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Homepage",
+        "tags": [
+          {
+            "name": "@Initial",
+            "line": 3
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "Open homepage URL",
+            "match": {
+              "location": "specs\\openHome.ts:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 14945000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "check logo present",
+            "match": {
+              "location": "specs\\openHome.ts:18"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules\\protractor-cucumber-framework\\lib\\resultsCapturer.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
