@@ -1,8 +1,7 @@
 import { Given, When, Then } from "cucumber";
 import { browser, element, By, $, $$, ExpectedConditions } from "protractor";
 import { async } from "q";
-browser.ignoreSynchronization = true;
-browser.waitForAngularEnabled(false);
+import { getEle } from "../helper/gcHelper";
 
 const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
@@ -16,5 +15,5 @@ Given("Open homepage URL", async () => {
 });
 
 Then("check logo present", async () => {
-  await expect(element(By.css(".logo.hide-xs .logo-default")).isDisplayed());
+  await expect(element(By.css(getEle("mainlogo"))).isDisplayed());
 });

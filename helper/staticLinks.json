@@ -1,0 +1,62 @@
+{
+  "home": {
+    "title": "Home",
+    "checkEle": ".carousel-inner",
+    "checkFor": ""
+  },
+  "donate": {
+    "title": "Donate",
+    "checkEle": ".row h3",
+    "checkFor": "Browse Campaign"
+  },
+  "fundraise": {
+    "title": "Fundraise",
+    "checkEle": ".wizard-branch .left_form",
+    "checkFor": "Start Fundraising"
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "checkEle": ".row h3",
+    "checkFor": "How It Works"
+  },
+  "about": {
+    "title": "About",
+    "checkEle": ".row h3",
+    "checkFor": "About us"
+  },
+  "contact": {
+    "title": "Contact",
+    "checkEle": ".row h3",
+    "checkFor": "Contact Us"
+  },
+  "education": {
+    "title": "Education",
+    "checkEle": ".boxes",
+    "checkFor": "Education"
+  },
+  "medicalTreatment": {
+    "title": "Medical Treatment",
+    "checkEle": ".boxes",
+    "checkFor": "Medical Treatment"
+  },
+  "ngoStraffTreatment": {
+    "title": "NGO Staff Treatment",
+    "checkEle": ".boxes",
+    "checkFor": "NGO Staff Treatment"
+  },
+  "ngoSeniorsPension": {
+    "title": "NGO Seniors Pension",
+    "checkEle": ".boxes",
+    "checkFor": "NGO Seniors Pension"
+  },
+  "general": {
+    "title": "General",
+    "checkEle": ".boxes",
+    "checkFor": "General"
+  },
+  "facebook": {
+    "title": ".fa-facebook",
+    "checkEle": ".boxes",
+    "checkFor": "General"
+  }
+}

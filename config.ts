@@ -31,7 +31,8 @@ export let config: Config = {
     console.log("ONPREPARE");
     browser.manage().window().maximize();
     browser.manage().timeouts().implicitlyWait(1000);
-    browser.ignoreSynchronization = true;
+    browser.ignoreSynchronization = false;
+    browser.waitForAngularEnabled(false);
   },
   onComplete: () => {
     console.log("ONCOMPLETE");
