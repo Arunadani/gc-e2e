@@ -30,7 +30,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 17301000000
+              "duration": 16754000000
             }
           },
           {
@@ -43,47 +43,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 10000000
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "match": {
-              "location": "node_modules\\protractor-cucumber-framework\\lib\\resultsCapturer.js:27"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 3000000
-            }
-          }
-        ]
-      },
-      {
-        "id": "gc-e2e-test;verify-social-media-links",
-        "keyword": "Scenario",
-        "line": 40,
-        "name": "Verify Social media links",
-        "tags": [
-          {
-            "name": "@Initial",
-            "line": 35
-          }
-        ],
-        "type": "scenario",
-        "steps": [
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 37,
-            "name": "Click on \"facebook\" social media link",
-            "match": {
-              "location": "specs\\navHeader.ts:25"
-            },
-            "result": {
-              "status": "failed",
-              "duration": 14471000000,
-              "error_message": "TimeoutError: Wait timed out after 12000ms\n    at C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\promise.js:2201:17\n    at ManagedPromise.invokeCallback_ (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\promise.js:1376:14)\n    at TaskQueue.execute_ (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\promise.js:3084:14)\n    at TaskQueue.executeNext_ (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\promise.js:3067:27)\n    at asyncRun (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\promise.js:2927:27)\n    at C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\promise.js:668:7\n    at process._tickCallback (internal/process/next_tick.js:68:7)\nFrom: Task: <anonymous wait>\n    at scheduleWait (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\promise.js:2188:20)\n    at ControlFlow.wait (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\promise.js:2517:12)\n    at Driver.wait (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\node_modules\\selenium-webdriver\\lib\\webdriver.js:934:29)\n    at run (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\built\\browser.js:58:33)\n    at ProtractorBrowser.to.(anonymous function) [as wait] (C:\\Users\\Arunarani\\AppData\\Roaming\\npm\\node_modules\\protractor\\built\\browser.js:66:16)\n    at C:\\Personal\\mygit\\gc-e2e\\specs\\navHeader.ts:37:17\n    at Generator.next (<anonymous>)\n    at fulfilled (C:\\Personal\\mygit\\gc-e2e\\build\\specs\\navHeader.js:5:58)\n    at process._tickCallback (internal/process/next_tick.js:68:7)"
+              "duration": 7000000
             }
           },
           {
@@ -95,6 +55,71 @@
             "result": {
               "status": "passed",
               "duration": 1000000
+            }
+          }
+        ]
+      },
+      {
+        "id": "gc-e2e-test;verify-footer-present",
+        "keyword": "Scenario",
+        "line": 44,
+        "name": "Verify footer Present",
+        "tags": [
+          {
+            "name": "@Initial",
+            "line": 43
+          }
+        ],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 45,
+            "name": "Check is footer present?",
+            "match": {
+              "location": "specs\\navFooter.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 46,
+            "name": "Check \"4\" columns are present?",
+            "match": {
+              "location": "specs\\navFooter.ts:49"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 47000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 47,
+            "name": "Check is copyright area present?",
+            "match": {
+              "location": "specs\\navFooter.ts:53"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "match": {
+              "location": "node_modules\\protractor-cucumber-framework\\lib\\resultsCapturer.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 0
             }
           }
         ]

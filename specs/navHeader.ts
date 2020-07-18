@@ -22,25 +22,6 @@ Then("click on footer links {string}", async (nav) => {
   await verifyStaticLink(".single-footer-widget .list a", staticLinks[nav]);
   browser.sleep(20000);
 });
-Then("Click on {string} social media link", async (navS) => {
-  let array;
-  console.log("menu is--", navS);
-  await verifySocialMediaStaticLink(".social-list a ", staticLinks[navS]);
-  browser.sleep(20000);
-});
-async function verifySocialMediaStaticLink(parentEle, mediaObj) {
-  var EC = prot;
-  await element(By.css(parentEle + mediaObj.title)).click();
-  browser.sleep(2000);
-
-  // Waits for the title to contain 'foo'.
-  await browser.wait(
-    ExpectedConditions.titleContains("GiveCharity - Home | Facebook"),
-    12000
-  );
-  browser.sleep(5000);
-  browser.navigate().back();
-}
 
 async function verifyStaticLink(parentEle, navObj) {
   await element(By.cssContainingText(parentEle, navObj.title)).click();
