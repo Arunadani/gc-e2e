@@ -29,6 +29,21 @@
     "checkEle": ".row h3",
     "checkFor": "Contact Us"
   },
+  "signIn": {
+    "title": "Sign In",
+    "checkEle": ".row h3",
+    "checkFor": " User Login"
+  },
+  "staff": {
+    "title": "Staff",
+    "checkEle": ".logo",
+    "checkFor": " Give Charity Admin Login "
+  },
+  "menu": {
+    "title": "Staff",
+    "checkEle": ".logo",
+    "checkFor": " Give Charity Admin Login "
+  },
   "education": {
     "title": "Education",
     "checkEle": ".boxes",

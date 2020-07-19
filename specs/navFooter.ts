@@ -11,7 +11,6 @@ import staticLinks from "../helper/staticLinks.json";
 import { getEle } from "../helper/gcHelper";
 
 let footer = getEle("footer");
-let EC = protractor.ExpectedConditions;
 
 let chai = require("chai")
   .use(require("chai-as-promised"))
@@ -26,21 +25,28 @@ let expect = chai.expect;
 });*/
 
 Then("Click on {string} social media link", async (navS) => {
-  console.log("menu is--", navS);
-  browser.sleep(5000);
-  //element(By.css(".social-list a " + mediaObj.title)).click();
-  verifySocialMediaStaticLink(".social-list a ", staticLinks[navS]);
+  console.log("socialmedialink--", navS);
+  let mediaObj = staticLinks[navS];
+
+  element(By.css(".social-list a " + mediaObj.title)).click();
+
+  await browser.getAllWindowHandles().then(function (guids) {
+    if (guids.length > 1) {
+      browser
+        .switchTo()
+        .window(guids[1])
+        .then(() => {
+          browser.driver.getCurrentUrl().then(function (url) {
+            url = url.toLowerCase();
+            expect(url.includes("facebook")).be.true;
+            expect(url.includes("givecharity")).be.true;
+            browser.driver.close();
+            browser.switchTo().window(guids[0]);
+          });
+        });
+    }
+  });
 });
-
-async function verifySocialMediaStaticLink(parentEle, mediaObj) {
-  /*click the url*/
-  await element(By.css(parentEle + mediaObj.title)).click();
-  browser.sleep(2000);
-
-  /*verify its title*/
-  expect(element(By.css(mediaObj.checkEle)).isDisplayed()).to.eventually.true;
-  browser.driver.quit();
-}
 
 When("Check is footer present?", function () {
   expect(element(By.css(footer.allColumn)).isPresent()).to.eventually.true;

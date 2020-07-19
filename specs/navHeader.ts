@@ -1,4 +1,4 @@
-import { Then } from "cucumber";
+import { Then, When } from "cucumber";
 import { browser, element, By, ExpectedConditions } from "protractor";
 
 const chai = require("chai");
@@ -23,10 +23,18 @@ Then("click on footer links {string}", async (nav) => {
   browser.sleep(20000);
 });
 
+When("Click on loginmenu {string}", async (navLn) => {
+  console.log("menu is--", navLn);
+
+  await verifyStaticLink(".navbar", staticLinks[navLn]);
+  browser.sleep(20000);
+});
+
 async function verifyStaticLink(parentEle, navObj) {
   await element(By.cssContainingText(parentEle, navObj.title)).click();
   browser.sleep(2000);
 
+  /* this if for only "home" menu*/
   if (navObj.checkFor) {
     await expect(
       element(

@@ -1,11 +1,12 @@
 Feature: gc-e2e Test
 
+
     @Initial
     Scenario: Homepage
         Given Open homepage URL
         Then check logo present
 
-    @Initial
+    @working
     Scenario Outline: Verifying header links
         Then click on header links "<header>"
         Examples:
@@ -16,8 +17,16 @@ Feature: gc-e2e Test
             | howItWorks |
             | about      |
             | contact    |
-            | signin     |
-            | staff      |
+
+    @notworking-"staff"
+    Scenario Outline: Verifying login menu
+        When Click on loginmenu "<item>"
+        Examples:
+            | item   |
+            | signIn |
+            | staff  |
+
+
     @working
     Scenario Outline: Verifying footer links
         Then click on footer links "<footer>"
@@ -34,15 +43,15 @@ Feature: gc-e2e Test
             | ngoSeniorsPension  |
             | general            |
 
-    @notworking
+    @Initial
     Scenario Outline: Verify Social media links
         Then Click on "<media>" social media link
-        Given Open homepage URL
+
         Examples:
             | media    |
             | facebook |
 
-    @Initial
+    @working
     Scenario: Verify footer Present
         When Check is footer present?
         Then Check "4" columns are present?
