@@ -68,13 +68,5 @@
     "title": "General",
     "checkEle": ".boxes",
     "checkFor": "General"
-  },
-  "facebook": {
-    "title": ".fa-facebook",
-    "checkEle": "#entity_sidebar"
-  },
-  "twitter": {
-    "title": ".fa-twitter",
-    "checkEle": ".css-1dbjc4n.r-1mi0q7o"
   }
 }

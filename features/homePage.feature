@@ -44,12 +44,18 @@ Feature: gc-e2e Test
             | general            |
 
     @Initial
-    Scenario Outline: Verify Social media links
+    Scenario Outline: Verify social media links
         Then Click on "<media>" social media link
 
         Examples:
-            | media    |
-            | facebook |
+            | media     |
+            | twitter   |
+            | facebook  |
+            | instagram |
+            | linkedin  |
+            | whatsapp  |
+
+
 
     @working
     Scenario: Verify footer Present
