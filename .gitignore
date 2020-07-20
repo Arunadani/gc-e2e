@@ -3,3 +3,4 @@ node_modules/
 .vscode/
 cucumberReport.html
 cucumberTestReport.json
+*.log
