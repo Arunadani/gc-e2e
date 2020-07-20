@@ -3,23 +3,23 @@ Feature: Footer Test
     @Initial
     Scenario: Verify footer Present
         When Check is footer present?
-        Then Check "4" columns are present?
+        Then Check all footer sections present?
         Then Check is copyright area present?
 
     @Initial
-    Scenario Outline: Verify copyright Area
-        Then Click on "<media>" copy rights
+    Scenario Outline: Verify copyright section
+        Then Click on "<crNav>" link in copyrights
 
         Examples:
-            | media           |
+            | crNav           |
             | copyright       |
             | terms&Condition |
             | privacy&Policy  |
             | staff           |
 
     @Initial
-    Scenario Outline: Verify social media links
-        Then Click on "<media>" social media link
+    Scenario Outline: Verify social media section
+        Then Click on "<media>" link in social media
 
         Examples:
             | media     |
@@ -30,8 +30,8 @@ Feature: Footer Test
             | whatsapp  |
 
     @Initial
-    Scenario Outline: Verifying footer links
-        Then click on footer links "<footer>"
+    Scenario Outline: Verify footer links
+        Then click on static links "<footer>"
 
         Examples:
             | footer             |

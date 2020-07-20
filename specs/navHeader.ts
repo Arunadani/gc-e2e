@@ -10,7 +10,7 @@ const expect = chai.expect;
 import staticLinks from "../helper/staticLinks.json";
 
 Then("click on header links {string}", async (navLn) => {
-  console.log("menu--", navLn);
+  console.log("header--", navLn);
 
   if (navLn == "signIn") {
     await verifyStaticLink(".login-box-top a", staticLinks[navLn]);
@@ -21,7 +21,7 @@ Then("click on header links {string}", async (navLn) => {
   }
 });
 
-Then("click on footer links {string}", async (nav) => {
+Then("click on static links {string}", async (nav) => {
   console.log("menu is--", nav);
 
   await verifyStaticLink(".single-footer-widget .list a", staticLinks[nav]);

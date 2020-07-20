@@ -7,7 +7,7 @@ Feature: gc-e2e Header Test
         Then check logo present
 
     @Initial
-    Scenario Outline: Verifying header links
+    Scenario Outline: Verify header links
         Then click on header links "<header>"
         Examples:
             | header     |

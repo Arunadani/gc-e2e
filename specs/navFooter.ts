@@ -44,7 +44,7 @@ async function verifyPop(guids, nav) {
   await browser.sleep(2000);
 }
 
-Then("Click on {string} social media link", async (socialNav) => {
+Then("Click on {string} link in social media", async (socialNav) => {
   console.log("socialmedialink--", socialNav);
 
   await browser.sleep(3000);
@@ -73,7 +73,7 @@ Then("Click on {string} social media link", async (socialNav) => {
   await browser.sleep(2000);
 });
 
-Then("Click on {string} copy rights", async (nav) => {
+Then("Click on {string} link in copyrights", async (nav) => {
   console.log("menu--", nav);
   let footer = footerLinks[nav];
 
@@ -118,7 +118,7 @@ When("Check is footer present?", function () {
   expect(element(By.css(footer.allColumn)).isPresent()).to.eventually.true;
 });
 
-Then('Check "4" columns are present?', async () => {
+Then("Check all footer sections present?", async () => {
   expect(await element.all(By.css(footer.eachColumn)).count()).to.equal(4);
 });
 
