@@ -9,11 +9,16 @@ const expect = chai.expect;
 
 import staticLinks from "../helper/staticLinks.json";
 
-Then("click on header links {string}", async (nav) => {
-  console.log("menu is--", nav);
+Then("click on header links {string}", async (navLn) => {
+  console.log("menu--", navLn);
 
-  await verifyStaticLink(".nav-link", staticLinks[nav]);
-  browser.sleep(20000);
+  if (navLn == "signIn") {
+    await verifyStaticLink(".login-box-top a", staticLinks[navLn]);
+    browser.sleep(10000);
+  } else {
+    await verifyStaticLink(".navbar-nav a", staticLinks[navLn]);
+    browser.sleep(10000);
+  }
 });
 
 Then("click on footer links {string}", async (nav) => {
@@ -23,26 +28,21 @@ Then("click on footer links {string}", async (nav) => {
   browser.sleep(20000);
 });
 
-When("Click on loginmenu {string}", async (navLn) => {
-  console.log("menu is--", navLn);
-
-  await verifyStaticLink(".navbar", staticLinks[navLn]);
-  browser.sleep(20000);
-});
-
 async function verifyStaticLink(parentEle, navObj) {
   await element(By.cssContainingText(parentEle, navObj.title)).click();
   browser.sleep(2000);
 
   /* this if for only "home" menu*/
-  if (navObj.checkFor) {
+
+  if (navObj.checkFor == "null") {
+    await expect(element(By.css(navObj.checkEle)).isPresent()).to.eventually
+      .true;
+  } else {
+    console.log();
     await expect(
       element(
         By.cssContainingText(navObj.checkEle, navObj.checkFor)
       ).isPresent()
     ).to.eventually.true;
-  } else {
-    await expect(element(By.css(navObj.checkEle)).isPresent()).to.eventually
-      .true;
   }
 }

@@ -8,6 +8,7 @@ import {
 } from "protractor";
 
 import staticLinks from "../helper/staticLinks.json";
+import footerLinks from "../helper/footerLinks.json";
 import { getEle } from "../helper/gcHelper";
 import { SSL_OP_EPHEMERAL_RSA } from "constants";
 import { getUnpackedSettings } from "http2";
@@ -70,6 +71,47 @@ Then("Click on {string} social media link", async (socialNav) => {
     }
   });
   await browser.sleep(2000);
+});
+
+Then("Click on {string} copy rights", async (nav) => {
+  console.log("menu--", nav);
+  let footer = footerLinks[nav];
+
+  await browser.sleep(3000);
+  if (footer.checkFor == "null") {
+    expect(
+      element(By.cssContainingText(footer.clickOn, footer.checkEle)).isPresent()
+    ).to.eventually.true;
+  } else {
+    console.log("coming to else");
+    await element(
+      By.cssContainingText(footer.clickOn, footer.checkEle)
+    ).click();
+    // element(By.cssContainingText(footer.clickOn, footer.checkEle)).click();
+    await browser.sleep(2000);
+    await browser.getAllWindowHandles().then(function (guids) {
+      if (guids.length > 1) {
+        console.log("Length of guid-->", guids.length);
+        browser
+          .switchTo()
+          .window(guids[1])
+          .then(() => {
+            browser.driver.getCurrentUrl().then(function (url) {
+              url = url.toLowerCase();
+              expect(url.includes(footer.checkFor)).be.true;
+              // expect(url.includes("givecharity")).be.true;
+              browser.sleep(2000);
+              browser.driver.close().then(function () {
+                browser.sleep(2000);
+                console.log("going to home window");
+                browser.switchTo().window(guids[0]);
+              });
+            });
+          });
+      }
+    });
+    await browser.sleep(2000);
+  }
 });
 
 When("Check is footer present?", function () {

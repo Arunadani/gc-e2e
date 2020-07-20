@@ -1,0 +1,22 @@
+{
+  "copyright": {
+    "clickOn": ".copyright-area p",
+    "checkEle": "Copyright @ 2020 GiveCharity. All rights reserved",
+    "checkFor": "null"
+  },
+  "terms&Condition": {
+    "clickOn": ".copyright-area a",
+    "checkEle": "Terms & Conditions",
+    "checkFor": "term-service"
+  },
+  "privacy&Policy": {
+    "clickOn": ".copyright-area a",
+    "checkEle": "Privacy Policy",
+    "checkFor": "privacy-policy"
+  },
+  "staff": {
+    "clickOn": ".login-box-top a",
+    "checkEle": "Staff",
+    "checkFor": "login"
+  }
+}

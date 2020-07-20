@@ -1,13 +1,13 @@
 {
   "home": {
     "title": "Home",
-    "checkEle": ".carousel-inner",
-    "checkFor": ""
+    "checkEle": ".banner.position-relative",
+    "checkFor": "null"
   },
   "donate": {
     "title": "Donate",
     "checkEle": ".row h3",
-    "checkFor": "Browse Campaign"
+    "checkFor": " Browse Campaigns"
   },
   "fundraise": {
     "title": "Fundraise",
@@ -17,27 +17,22 @@
   "howItWorks": {
     "title": "How It Works",
     "checkEle": ".row h3",
-    "checkFor": "How It Works"
+    "checkFor": " How It Works"
   },
   "about": {
     "title": "About",
     "checkEle": ".row h3",
-    "checkFor": "About us"
+    "checkFor": " About us"
   },
   "contact": {
     "title": "Contact",
     "checkEle": ".row h3",
-    "checkFor": "Contact Us"
+    "checkFor": " Contact Us"
   },
   "signIn": {
     "title": "Sign In",
     "checkEle": ".row h3",
     "checkFor": " User Login"
-  },
-  "staff": {
-    "title": "Staff",
-    "checkEle": ".logo",
-    "checkFor": " Give Charity Admin Login "
   },
   "menu": {
     "title": "Staff",

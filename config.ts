@@ -18,7 +18,9 @@ export let config: Config = {
   // Spec patterns are relative to the configuration file location passed
   // to protractor (in this example conf.js).
   // They may include glob patterns.
-  specs: ["../*/*.feature"],
+  //specs: ["../*/*.feature"],
+  specs: ["../*/header.feature", "../*/footer.feature"],
+
   cucumberOpts: {
     // require step definitions
     tags: "@Initial",
