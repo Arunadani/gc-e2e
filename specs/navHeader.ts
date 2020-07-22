@@ -38,7 +38,6 @@ async function verifyStaticLink(parentEle, navObj) {
     await expect(element(By.css(navObj.checkEle)).isPresent()).to.eventually
       .true;
   } else {
-    console.log();
     await expect(
       element(
         By.cssContainingText(navObj.checkEle, navObj.checkFor)
