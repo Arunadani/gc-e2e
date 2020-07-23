@@ -13,6 +13,9 @@ export let config: Config = {
   // Capabilities to be passed to the webdriver instanace.
   capabilities: {
     browserName: "chrome",
+    chromeOptions: {
+      args: ["--no-sandbox", "--disable-dev-shm-usage"],
+    },
   },
 
   // Spec patterns are relative to the configuration file location passed
