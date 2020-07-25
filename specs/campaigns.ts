@@ -75,6 +75,9 @@ When("Click on a campaign", async () => {
 
 Then("Verify all functionality in campaign card", async () => {
   let blogCard = element(By.css("#active_campaign .card_img_hover_sec"));
+
+  let list_Card = element.all(By.css("#active_campaign .team-block"));
+  //let blogCard = element(By.css("#active_campaign .card_img_hover_sec"));
   let list_By = element.all(By.css("#active_campaign .blog_card .card_by"));
   let list_author = element.all(
     By.css("#active_campaign .blog_card .card_author")
@@ -110,63 +113,79 @@ Then("Verify all functionality in campaign card", async () => {
   let list_donate = element.all(
     By.css("#active_campaign .blog_card .float-right")
   );
+  let max;
 
+  /*expect(
+    await element.all(By.css("#active_campaign .blog_card")).count()
+  ).to.equal(5);*/
+  browser.sleep(10000);
+  await element
+    .all(By.css("#active_campaign .team-block"))
+    .count()
+    .then((n) => {
+      console.log("size", n);
+      max = n;
+    });
+  let index: number = fn_randomNum(max);
+  console.log("random_num-->", index);
   /* mouse hover*/
   // browser.actions().mouseMove(blogCard.get(0)).perform();
-  browser.sleep(2000);
+  //console.log("max_Num", list_Card.count());
+
   /*By*/
-  expect(list_By.get(0).isPresent()).to.eventually.true;
+  expect(list_By.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*author*/
-  expect(list_author.get(0).isPresent()).to.eventually.true;
+  expect(list_author.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*title*/
-  expect(list_title.get(0).isPresent()).to.eventually.true;
+  expect(list_title.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*social media - whatsapp */
-  expect(list_whatsapp.get(0).isPresent()).to.eventually.true;
+  expect(list_whatsapp.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*social media - facebook */
-  expect(list_facebook.get(0).isPresent()).to.eventually.true;
+  expect(list_facebook.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*readmore*/
-  expect(list_readMore.get(0).isPresent()).to.eventually.true;
+  expect(list_readMore.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /* Bottom Info*/
   /*Raised amount*/
-  expect(list_raisedAmount.get(0).isPresent()).to.eventually.true;
+  expect(list_raisedAmount.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*Porgress bar*/
-  expect(list_progressBar.get(0).isPresent()).to.eventually.true;
+  expect(list_progressBar.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*Percentage*/
-  expect(list_percentage.get(0).isPresent()).to.eventually.true;
+  expect(list_percentage.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*goalAmount*/
-  expect(list_goalAmount.get(0).isPresent()).to.eventually.true;
+  expect(list_goalAmount.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*Remaining days*/
-  expect(list_remainingDays.get(0).isPresent()).to.eventually.true;
+  expect(list_remainingDays.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
   /*Donate*/
-  expect(list_donate.get(0).isPresent()).to.eventually.true;
+  expect(list_donate.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
 
-  fn_donate(list_donate);
-  fn_readMore(list_readMore);
-  fn_socialMedia(list_facebook, "facebook");
+  fn_donate(list_donate, index);
+  fn_readMore(list_readMore, index);
+  fn_socialMedia(list_facebook, index, "facebook");
 
   await browser.sleep(2000);
-  fn_socialMedia(list_whatsapp, "whatsapp");
+  fn_socialMedia(list_whatsapp, index, "whatsapp");
   await browser.sleep(2000);
+
   //fn_socialMedia(list_facebook, "facebook");
 
   console.log("<-----end---->");
 
   await browser.sleep(2000);
 });
-async function fn_socialMedia(mediaEle, checkFor) {
-  await mediaEle.get(0).click();
+async function fn_socialMedia(mediaEle, index, checkFor) {
+  await mediaEle.get(index).click();
   await browser.sleep(10000);
 
   await browser.getAllWindowHandles().then(function (guids) {
@@ -193,13 +212,16 @@ async function fn_socialMedia(mediaEle, checkFor) {
   await browser.sleep(2000);
 }
 
-function fn_readMore(readMoreEle) {
-  readMoreEle.get(0).click();
+function fn_readMore(readMoreEle, index) {
+  readMoreEle.get(index).click();
   browser.sleep(1000);
   browser.navigate().back();
 }
-function fn_donate(donateEle) {
-  donateEle.get(0).click();
+function fn_donate(donateEle, index) {
+  donateEle.get(index).click();
   browser.sleep(1000);
   browser.navigate().back();
+}
+function fn_randomNum(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }

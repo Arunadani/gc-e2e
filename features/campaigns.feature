@@ -10,7 +10,7 @@ Feature: Campaigns Test
 
     @Initial
     Scenario: Veriy Active Campaigns sections
-        Then Verify all functionality in campaign card
+           Then Verify all functionality in campaign card
 
 
 
