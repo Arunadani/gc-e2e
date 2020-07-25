@@ -154,12 +154,44 @@ Then("Verify all functionality in campaign card", async () => {
 
   fn_donate(list_donate);
   fn_readMore(list_readMore);
-  console.log("end---->");
-  /*read more*/
-  //list_readMore.get(0).click();
-  // browser.sleep(1000);
+  fn_socialMedia(list_facebook, "facebook");
+
+  await browser.sleep(2000);
+  fn_socialMedia(list_whatsapp, "whatsapp");
+  await browser.sleep(2000);
+  //fn_socialMedia(list_facebook, "facebook");
+
+  console.log("<-----end---->");
+
   await browser.sleep(2000);
 });
+async function fn_socialMedia(mediaEle, checkFor) {
+  await mediaEle.get(0).click();
+  await browser.sleep(10000);
+
+  await browser.getAllWindowHandles().then(function (guids) {
+    if (guids.length > 1) {
+      console.log("Length of guid-->", guids.length);
+      browser
+        .switchTo()
+        .window(guids[1])
+        .then(() => {
+          browser.driver.getCurrentUrl().then(function (url) {
+            url = url.toLowerCase();
+            expect(url.includes(checkFor)).to.exist;
+            // expect(url.includes("givecharity")).be.true;
+            browser.sleep(2000);
+            browser.driver.close().then(function () {
+              browser.sleep(2000);
+              console.log("going to home window");
+              browser.switchTo().window(guids[0]);
+            });
+          });
+        });
+    }
+  });
+  await browser.sleep(2000);
+}
 
 function fn_readMore(readMoreEle) {
   readMoreEle.get(0).click();
