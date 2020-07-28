@@ -74,53 +74,37 @@ When("Click on a campaign", async () => {
 });
 
 Then("Verify all functionality in campaign card", async () => {
-  let blogCard = element(By.css("#active_campaign .card_img_hover_sec"));
+  console.log("Active campaign");
+  fn_activeCampaign("#active_campaign ");
+});
+async function fn_activeCampaign(ID: string) {
+  let blogCard = element(By.css(ID + ".card_img_hover_sec"));
 
-  let list_Card = element.all(By.css("#active_campaign .team-block"));
+  let list_Card = element.all(By.css(ID + ".team-block"));
   //let blogCard = element(By.css("#active_campaign .card_img_hover_sec"));
-  let list_By = element.all(By.css("#active_campaign .blog_card .card_by"));
-  let list_author = element.all(
-    By.css("#active_campaign .blog_card .card_author")
-  );
-  let list_title = element.all(
-    By.css("#active_campaign .blog_card .card_title")
-  );
-  let list_readMore = element.all(
-    By.css("#active_campaign .blog_card .btn-light")
-  );
-  let list_whatsapp = element.all(
-    By.css("#active_campaign .blog_card .fa-whatsapp")
-  );
-  let list_facebook = element.all(
-    By.css("#active_campaign .blog_card .fa-facebook")
-  );
+  let list_By = element.all(By.css(ID + ".blog_card .card_by"));
+  let list_author = element.all(By.css(ID + ".card_author"));
+  let list_title = element.all(By.css(ID + ".blog_card .card_title"));
+  let list_readMore = element.all(By.css(ID + ".blog_card .btn-light"));
+  let list_whatsapp = element.all(By.css(ID + ".blog_card .fa-whatsapp"));
+  let list_facebook = element.all(By.css(ID + ".blog_card .fa-facebook"));
 
-  let list_progressBar = element.all(
-    By.css("#active_campaign .blog_card .progress-bar")
-  );
-  let list_goalAmount = element.all(
-    By.css("#active_campaign .blog_card .ch_goal")
-  );
-  let list_percentage = element.all(
-    By.css("#active_campaign .blog_card .percentes")
-  );
-  let list_raisedAmount = element.all(
-    By.css("#active_campaign .blog_card .price-raised")
-  );
+  let list_progressBar = element.all(By.css(ID + ".blog_card .progress-bar"));
+  let list_goalAmount = element.all(By.css(ID + ".blog_card .ch_goal"));
+  let list_percentage = element.all(By.css(ID + ".blog_card .percentes"));
+  let list_raisedAmount = element.all(By.css(ID + ".blog_card .price-raised"));
   let list_remainingDays = element.all(
-    By.css("#active_campaign .blog_card .remaining-days")
+    By.css(ID + ".blog_card .remaining-days")
   );
-  let list_donate = element.all(
-    By.css("#active_campaign .blog_card .float-right")
-  );
+  let list_donate = element.all(By.css(ID + ".blog_card .float-right"));
   let max;
 
   /*expect(
     await element.all(By.css("#active_campaign .blog_card")).count()
   ).to.equal(5);*/
-  browser.sleep(10000);
+  await browser.sleep(10000);
   await element
-    .all(By.css("#active_campaign .team-block"))
+    .all(By.css(ID + ".team-block"))
     .count()
     .then((n) => {
       console.log("size", n);
@@ -128,9 +112,6 @@ Then("Verify all functionality in campaign card", async () => {
     });
   let index: number = fn_randomNum(max);
   console.log("random_num-->", index);
-  /* mouse hover*/
-  // browser.actions().mouseMove(blogCard.get(0)).perform();
-  //console.log("max_Num", list_Card.count());
 
   /*By*/
   expect(list_By.get(index).isPresent()).to.eventually.true;
@@ -170,6 +151,7 @@ Then("Verify all functionality in campaign card", async () => {
   expect(list_donate.get(index).isPresent()).to.eventually.true;
   browser.sleep(1000);
 
+  console.log("Before function");
   fn_donate(list_donate, index);
   fn_readMore(list_readMore, index);
   fn_socialMedia(list_facebook, index, "facebook");
@@ -183,7 +165,7 @@ Then("Verify all functionality in campaign card", async () => {
   console.log("<-----end---->");
 
   await browser.sleep(2000);
-});
+}
 async function fn_socialMedia(mediaEle, index, checkFor) {
   await mediaEle.get(index).click();
   await browser.sleep(10000);

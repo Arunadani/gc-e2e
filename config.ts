@@ -14,7 +14,12 @@ export let config: Config = {
   capabilities: {
     browserName: "chrome",
     chromeOptions: {
-      args: ["--no-sandbox", "--disable-dev-shm-usage"],
+      args: [
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-blink-features",
+        "--disable-blink-features=AutomationControlled",
+      ],
     },
   },
 
@@ -22,8 +27,9 @@ export let config: Config = {
   // to protractor (in this example conf.js).
   // They may include glob patterns.
   //specs: ["../*/*.feature"],
-  specs: ["../*/header.feature", "../*/campaigns.feature"],
+  specs: ["../*/header.feature", "../*/signIn.feature"],
   //, "../*/footer.feature"],
+  // "../*/campaigns.feature"
 
   cucumberOpts: {
     // require step definitions
