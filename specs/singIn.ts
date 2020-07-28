@@ -16,26 +16,24 @@ chai.use(require("chai-dom"));
 const expect = chai.expect;
 let email = element(By.name(login.userEmail));
 let password = element(By.css(login.userPassword));
-//data-icon="sign-out-alt"
 
-Given("Click on logout", async () => {
-  element(By.xpath("//*[@data-icon='sign-out-alt']")).click();
-  await browser.sleep(4000);
-});
-
-Given("Clear username & password", async () => {
+function fn_clearEmailPass() {
   password.clear();
   email.clear();
+}
+
+Given("Click on logout", async () => {
+  element(By.css(login.userProfile)).click();
+  await browser.sleep(1000);
+  element(By.xpath(login.userLogout)).click();
+  await browser.sleep(2000);
 });
 
 Then("Click login button", async () => {
-  await browser.sleep(2000);
   /*Enter Login*/
-  await element(By.xpath("//button[@name='login']")).click();
+  await element(By.xpath(login.userLogin)).click();
   await browser.sleep(5000);
 
-  //browser.wait(ExpectedConditions.elementToBeClickable($(login.userIcon)),5000);
-  //expect(element(By.css(login.userIcon)).isPresent()).to.exist;
   expect(
     element(By.cssContainingText(".row h3", " User Dasboard")).isDisplayed()
   ).to.exist;
@@ -52,21 +50,20 @@ When("Click on Sign In menu", async () => {
       By.cssContainingText(login.userCheckEle, login.userCheckFor)
     ).isPresent()
   ).to.eventually.true;
+  fn_clearEmailPass();
+  await browser.sleep(2000);
 });
 Then("Enter correct email and password", async () => {
   /*enter username*/
-  email.clear();
   email.sendKeys("anshcardinal@gmail.com");
-  await browser.sleep(2000);
+  await browser.sleep(3000);
   /*enter password*/
-  password.clear();
   password.sendKeys("Putrajay4");
   await browser.sleep(2000);
 });
 
 Then("Enter only password", async () => {
   /*enter password*/
-
   password.sendKeys("Putrajay4");
   await browser.sleep(2000);
 });
@@ -76,7 +73,6 @@ Then("Enter wrong email", async () => {
 });
 Then("Enter only email", async () => {
   /*enter email*/
-
   email.sendKeys("anshcardinal@gmail.com");
   await browser.sleep(2000);
 });

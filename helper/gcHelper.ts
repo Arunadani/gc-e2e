@@ -1,6 +1,6 @@
 const gc = {
   mainlogo: ".logo.hide-xs .logo-default",
-  loginEle:".login-box-top a",
+  loginEle: ".login-box-top a",
 
   navheader: {
     menu: ".nav-link",
@@ -10,20 +10,21 @@ const gc = {
     Donate: ".row h3",
     Fundraise: ".wizard-branch .left_form",
   },
-  footer:{
-    allColumn:".footer-area",
-    eachColumn:".single-footer-widget",
-    copyRight:".copyright-area"
+  footer: {
+    allColumn: ".footer-area",
+    eachColumn: ".single-footer-widget",
+    copyRight: ".copyright-area",
   },
-  login:{
-    userCheckEle:".row h3",
-    userCheckFor:" User Login",
-    userEmail:"email",
-    userPassword:"#password",
-    userIcon:".login-box-top"
-   
-
-  }
+  login: {
+    userCheckEle: ".row h3",
+    userCheckFor: " User Login",
+    userEmail: "email",
+    userPassword: "#password",
+    userIcon: ".login-box-top",
+    userProfile: ".fa-angle-down",
+    userLogout: "//*[@data-icon='sign-out-alt']",
+    userLogin: "//button[@name='login']",
+  },
 };
 export function getEle(type: any) {
   return gc[type];
