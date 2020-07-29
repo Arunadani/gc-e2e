@@ -10,7 +10,8 @@ chai.use(require("chai-dom"));
 const expect = chai.expect;
 
 Given("Open homepage URL", async () => {
-  await browser.get("https://gcadmin:tigerhill2020@qa.givecharity.org");
+  // await browser.get("https://gcadmin:tigerhill2020@qa.givecharity.org");
+  await browser.get("https://staging.givecharity.org/");
   await browser.sleep(2000);
 });
 

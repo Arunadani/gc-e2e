@@ -27,9 +27,10 @@ export let config: Config = {
   // to protractor (in this example conf.js).
   // They may include glob patterns.
   //specs: ["../*/*.feature"],
-  specs: ["../*/header.feature", "../*/signIn.feature"],
+  specs: ["../*/header.feature", "../*/donate.feature"],
   //, "../*/footer.feature"],
   // "../*/campaigns.feature"
+  // "../*/signIn.feature
 
   cucumberOpts: {
     // require step definitions
