@@ -1,10 +1,13 @@
 import { Config } from "protractor";
 import { browser } from "protractor";
 import * as reporter from "cucumber-html-reporter";
+import { getUrl } from "./helper/environment";
+
+console.log("url", getUrl());
 
 export let config: Config = {
   // The address of a running selenium server.
-  //seleniumAddress: 'http://localhost:4444/wd/hub',
+  // seleniumAddress: "http://localhost:4444/wd/hub",
   directConnect: true,
   framework: "custom",
   // path relative to the current config file
@@ -27,10 +30,11 @@ export let config: Config = {
   // to protractor (in this example conf.js).
   // They may include glob patterns.
   //specs: ["../*/*.feature"],
-  specs: ["../*/header.feature", "../*/donate.feature"],
+  specs: ["../*/header.feature"],
   //, "../*/footer.feature"],
   // "../*/campaigns.feature"
   // "../*/signIn.feature
+  // "../*/donate.feature"
 
   cucumberOpts: {
     // require step definitions
@@ -43,9 +47,11 @@ export let config: Config = {
   onPrepare: () => {
     console.log("ONPREPARE");
     browser.manage().window().maximize();
-    browser.manage().timeouts().implicitlyWait(1000);
+    browser.manage().timeouts().implicitlyWait(5000);
     browser.ignoreSynchronization = false;
     browser.waitForAngularEnabled(false);
+    browser.get("https://staging.givecharity.org/");
+    browser.sleep(20000);
   },
   onComplete: () => {
     console.log("ONCOMPLETE");

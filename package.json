@@ -4,9 +4,11 @@
   "description": "e2e",
   "main": "index.js",
   "scripts": {
+    "pretest": "npm run tsc",
+    "tsc": "tsc",
     "test": "protractor ./build/config.js",
-    "pretest": "tsc",
-    "webdriver-update": "./node_modules/.bin/webdriver-manager update"
+    "staging": "npm run test --env=staging",
+    "prod": "npm run test --env=prod"
   },
   "repository": {
     "type": "git",
