@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "pretest": "npm run tsc",
+    "pretest:staging": "npm run tsc",
+    "pretest:qa": "npm run tsc",
     "tsc": "tsc",
     "test": "protractor ./build/config.js",
-    "staging": "npm run test --env=staging",
-    "prod": "npm run test --env=prod"
+    "test:staging": "protractor ./build/config.js --env=staging",
+    "test:qa": "protractor ./build/config.js --env=qa"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
     "protractor-cucumber-framework": "^6.2.0",
     "ts-node": "^8.5.0",
     "typescript": "^3.6.4",
-    "update-node": "^0.1.0"
+    "update-node": "^0.1.0",
+    "yargs": "^15.4.1"
   }
 }
