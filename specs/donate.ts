@@ -97,17 +97,6 @@ Then("Enter the card number", async () => {
 Then("Click donate on payement section", async () => {
   fn_donate();
 });
-function fn_homeFrame() {
-  browser.switchTo().defaultContent();
-  browser.sleep(5000);
-}
-function fn_donate() {
-  element(By.cssContainingText(".forward", "Donate ")).click();
-  browser.sleep(5000);
-}
-function fn_tab() {
-  browser.actions().sendKeys(protractor.Key.TAB).perform();
-}
 
 Then("Enter the wrong card name {string}", async (string) => {
   let name = element(By.xpath(donate.cardName));
@@ -118,53 +107,60 @@ Then("Enter the wrong card name {string}", async (string) => {
   if (string != "test") {
     fn_toastError(".error");
   }
-  /*path and error message*/
+
   await browser.sleep(2000);
   name.clear();
 });
 
-Then("Enter the card  {string} number", async (string) => {
-  browser.switchTo().frame(element(By.tagName("iframe")).getWebElement());
-
-  let cardNumber = element(By.name(donate.cardNum));
-  cardNumber.sendKeys(string);
-  await browser.sleep(2000);
-
-  fn_donate();
-  fn_homeFrame();
-
-  /*path and error message*/
-  await browser.sleep(2000);
-
-  cardNumber.clear();
-});
-
-Then("Enter the wrong card number {string}", async (string) => {
-  if (string != 0) {
+Then(
+  "Enter the wrong card details and {string} and {string} and {string} and {string}",
+  async (string, string2, string3, string4) => {
     browser.switchTo().frame(element(By.tagName("iframe")).getWebElement());
     console.log("wrong card number");
 
     let cardNumber = element(By.name(donate.cardNum));
-    cardNumber.sendKeys(string);
+    cardNumber.clear();
     await browser.sleep(2000);
+    cardNumber.sendKeys(string);
 
     fn_tab();
+    let date = element(By.xpath("//input[@name='exp-date']"));
+    date.clear();
+    await browser.sleep(2000);
+    date.sendKeys(string2);
 
-    // await element(By.xpath("//input[@name='exp-date']")).sendKeys(string2);
-    // browser.sleep(2000);
+    //fn_tab();
+    let cvv = element(By.xpath("//input[@name='cvc']"));
+    cvv.clear();
+    browser.sleep(2000);
+    cvv.sendKeys(string3);
+
+    // fn_tab();
+    // let zip = element(By.xpath("//input[@name='postal']"));
+    // zip.clear();
+    // await browser.sleep(2000);
+    // zip.sendKeys(string4);
 
     fn_homeFrame();
     fn_donate();
     await browser.sleep(2000);
-    fn_toastError(".toast-error");
-
+    fn_toastError("#toast-container .toast-error");
     await browser.sleep(2000);
-
-    cardNumber.clear();
   }
-});
+);
 
-function fn_toastError(checkEle) {
+async function fn_toastError(checkEle) {
+  browser.sleep(2000);
+  await expect(element(By.css(checkEle)).isDisplayed()).to.eventually.true;
+}
+function fn_homeFrame() {
+  browser.switchTo().defaultContent();
   browser.sleep(5000);
-  expect(element(By.css(checkEle)).isDisplayed()).to.eventually.true;
+}
+function fn_donate() {
+  element(By.cssContainingText(".forward", "Donate ")).click();
+  browser.sleep(5000);
+}
+function fn_tab() {
+  browser.actions().sendKeys(protractor.Key.TAB).perform();
 }

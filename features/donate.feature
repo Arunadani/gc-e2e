@@ -1,11 +1,11 @@
 Feature: donate Test
 
-    @Initial
+    @end
     Scenario: donate functionality
         Given Click on Donate menu
         When Click on Active Campaign
         Then Click donate in campaign card
-    @Initial
+    @end
     Scenario: Donate form
         Then Click on currency
         And Enter the amount
@@ -23,15 +23,29 @@ Feature: donate Test
 
     @Initial
     Scenario Outline: Payment - Negative test cases
+        Given Click on Donate menu
+        When Click on Active Campaign
+        Then Click donate in campaign card
+
+        Then Click on currency
+        And Enter the amount
+        Then Enter first name
+        And Enter email
+        Then Enter phone number
+        And Click on pay
+
+
         Then check Payment section present?
         Then Enter the wrong card name "<name>"
-        And Enter the wrong card number "<number>"
+        Then Enter the wrong card details and "<number>" and "<date>" and "<cvv>" and "<zip>"
         And Click donate on payement section
 
         Examples:
             | name | number    | date | cvv | zip |
             | @74  |           |      |     |     |
-            | test | 410051006 | 0119 |     |     |
+            | test | 410051006 | 0119 | 11  |     |
+
+
 
 
 
