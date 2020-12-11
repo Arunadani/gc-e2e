@@ -6,7 +6,7 @@ const baseUrl = argv.env && url[argv.env] ? url[argv.env] : url["qa"];
 
 export let config: Config = {
   // The address of a running selenium server.
-  // seleniumAddress: "http://localhost:4444/wd/hub",
+  //seleniumAddress: "http://localhost:4444/wd/hub",
   directConnect: true,
   framework: "custom",
   baseUrl: baseUrl,
@@ -21,6 +21,7 @@ export let config: Config = {
         "--no-sandbox",
         "--disable-dev-shm-usage",
         "--disable-blink-features",
+        "--disableChecks",
         "--disable-blink-features=AutomationControlled",
       ],
     },
@@ -30,30 +31,39 @@ export let config: Config = {
   // to protractor (in this example conf.js).
   // They may include glob patterns.
   //specs: ["../*/*.feature"],
-  specs: ["../*/header.feature", "../*/donate.feature"],
-  //, "../*/footer.feature"],
-  // "../*/campaigns.feature"
-  // "../*/signIn.feature
+  specs: [
+    "../*/header.feature",
+    "../*/footer.feature",
+    "../*/fundraiser.feature",
+    "../*/donate.feature",
+    "../*/signIn.feature",
+    "../*/campaigns.feature",
+  ],
+  // /*working */
+  // "../*/footer.feature",
+  // "../*/donate.feature",
+  // "../*/campaigns.feature",
+  // "../*/signIn.feature"
 
   cucumberOpts: {
-    // require step definitions
-    tags: "@Initial",
+    // ~@test - > tags will not execute
+    tags: "~@test",
     format: "json:./cucumberTestReport.json",
     require: [
       "./specs/*.js", // accepts a glob
     ],
   },
   onPrepare: async () => {
-    console.log("ONPREPARE");
+    console.log("onPrepare");
     await browser.manage().window().maximize();
     browser.manage().timeouts().implicitlyWait(5000);
-    browser.ignoreSynchronization = false;
+    //browser.ig = false;
     browser.waitForAngularEnabled(false);
     await browser.get(baseUrl);
-    browser.sleep(10000);
+    await browser.sleep(10000);
   },
   onComplete: () => {
-    console.log("ONCOMPLETE");
+    console.log("onComplete");
     var options = {
       theme: "bootstrap",
       jsonFile: "./cucumberTestReport.json",
@@ -70,7 +80,6 @@ export let config: Config = {
         Executed: "Remote",
       },
     };
-
     reporter.generate(options);
   },
 };

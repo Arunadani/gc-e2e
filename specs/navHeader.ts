@@ -14,10 +14,12 @@ Then("click on header links {string}", async (navLn) => {
 
   if (navLn == "signIn") {
     await verifyStaticLink(".login-box-top a", staticLinks[navLn]);
-    browser.sleep(10000);
+    //browser.sleep(10000);
+    await browser.sleep(2000);
   } else {
     await verifyStaticLink(".navbar-nav a", staticLinks[navLn]);
-    browser.sleep(10000);
+    //browser.sleep(10000);
+    await browser.sleep(2000);
   }
 });
 
@@ -25,7 +27,8 @@ Then("click on static links {string}", async (nav) => {
   console.log("menu is--", nav);
 
   await verifyStaticLink(".single-footer-widget .list a", staticLinks[nav]);
-  browser.sleep(20000);
+  //browser.sleep(20000);
+  await browser.sleep(2000);
 });
 
 async function verifyStaticLink(parentEle, navObj) {

@@ -1,16 +1,14 @@
 Feature: Campaigns Test
-
-    @Initial
+    @test
     Scenario: Verify campaigns section
         When Click on Donate menu
         Then Check box section present?
         Then Check dropdown & search section present?
         And Check Active & Completed Campaigns are present?
 
-
-    @Initial
     Scenario: Veriy Active Campaigns sections
-           Then Verify all functionality in campaign card
+        When Click on Donate menu
+        Then Verify all functionality in campaign card
 
 
 

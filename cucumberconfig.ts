@@ -3,7 +3,7 @@ import * as reporter from "cucumber-html-reporter";
 
 export let config: Config = {
   // The address of a running selenium server.
-  // seleniumAddress: 'http://localhost:4444/wd/hub',
+  //seleniumAddress: "http://localhost:4444/wd/hub",
   directConnect: true,
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
