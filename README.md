@@ -11,6 +11,10 @@
 
 ## Steps to execute automation script
 
+- Clone repo
+
+  `git clone git@github.com:Arunadani/gc-e2e.git`
+
 - Go to app repo 
 
   `cd ./gc-e2e`

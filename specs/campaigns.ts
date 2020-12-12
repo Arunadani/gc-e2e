@@ -1,11 +1,5 @@
 import { Then, When } from 'cucumber';
-import {
-  browser,
-  element,
-  By,
-  ElementFinder,
-  ExpectedConditions,
-} from 'protractor';
+import { browser, element, By } from 'protractor';
 
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
@@ -15,6 +9,8 @@ const expect = chai.expect;
 
 var longWait = 20000;
 var shortWait = 10000;
+
+let compId = 'app-browse-campaign ';
 
 When('Click on Donate menu', async () => {
   console.log('donate menu click');
@@ -26,34 +22,128 @@ When('Click on Donate menu', async () => {
   await browser.sleep(5000);
 });
 
-Then('Check Active & Completed Campaigns are present?', async () => {
-  expect(element(By.css('#ongoing_campaignId')).isPresent()).to.eventually.true;
-  browser.sleep(2000);
-  expect(element(By.css('#completed_campaignId')).isPresent()).to.eventually
-    .true;
-  browser.sleep(2000);
-});
-Then('Check box section present?', async () => {
-  // expect(element.all(By.css(".boxes .btn")).count()).to.deep.equal(6);
-  /* element
-    .all(By.css(".boxes .btn-light"))
-    .count()
-    .then(function (size) {
-      browser.sleep(2000);
-      console.log("box size-->", size);
-      expect(size).to.equal(6);
-    });*/
-  browser.sleep(2000);
+Then('Should have category filter checkbox', async () => {
+  expect(await element.all(By.css(compId + ' .boxes .btn')).count()).to.equal(
+    8
+  );
 });
 
-Then('Check dropdown & search section present?', async () => {
-  browser.sleep(2000);
-  /*Dropdown*/
-  expect(element(By.css('#cat')).isPresent()).to.eventually.true;
-  /*Text*/
-  expect(element(By.css('#table_filter')).isPresent()).to.eventually.true;
-  /*search*/
-  expect(element(By.css('#searchBtn')).isPresent()).to.eventually.true;
+Then('Should have filter by time period', async () => {
+  expect(element(By.css(compId + '#cat')).isPresent()).to.eventually.true;
+});
+
+Then('Should have 4 options in time period filter', async () => {
+  expect(await element.all(By.css(compId + '#cat option')).count()).to.equal(4);
+});
+
+Then('Should have Search input field', async () => {
+  expect(element(By.css(compId + 'input#table_filter')).isPresent()).to
+    .eventually.true;
+});
+
+Then('Should have Search button', async () => {
+  expect(element(By.css(compId + 'button#searchBtn')).isPresent()).to.eventually
+    .true;
+});
+
+Then('Should have {string} Campaign Tab', async (type) => {
+  let ccEle = type === 'active' ? 'a#ongoing_campaignId' : 'a#completed_campaignId';
+  expect(element(By.css(`${compId} ${ccEle}`)).isPresent()).to
+    .eventually.true;
+});
+
+When('Click on {string} Campaign Tab', async (type) => {
+  let ccEle = type === 'active' ? 'a#ongoing_campaignId' : 'a#completed_campaignId';
+  element(By.css(`${compId} ${ccEle}`)).click();
+  expect(element(By.css(`${compId} ${ccEle}.active`)).isPresent())
+    .to.eventually.true;
+});
+
+Then('Should have {string} campaign cards', async (type) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  expect(
+    await element.all(By.css(`${ccEle} campaign-card`)).count()
+  ).to.be.above(1);
+});
+
+Then('Campaign: {string}, Card: {string} Should have a title', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div h5`));
+  await card.get(index).getText().then(text => {
+    console.error('Title: ', text);
+    expect(text.length).to.be.gt(1)
+  });
+});
+
+Then('Campaign: {string}, Card: {string} Should have a donee', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .card-donee`));
+  await card.get(index).getText().then(text => {
+    console.error('Donee: ', text);
+    expect(text.length).to.be.gt(1)
+  });
+});
+
+Then('Campaign: {string}, Card: {string} Should have image', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .card-img img`));
+  expect(await card.get(index).isPresent()).to.be.true;
+});
+
+Then('Campaign: {string}, Card: {string} Should have a Goal amount', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .card-info .text-right span`));
+  await card.get(index).getText().then(text => {
+    console.error('Goal amount: ', text);
+    expect(text.length).to.be.gt(1)
+  });
+});
+
+Then('Campaign: {string}, Card: {string} Should have a Raised amount', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .card-info .price-raised span`));
+  await card.get(index).getText().then(text => {
+    console.error('Raised amount: ', text);
+    expect(text.length).to.be.gt(1)
+  });
+});
+
+Then('Campaign: {string}, Card: {string} Should have a Progress bar', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .progress-bar-striped`));
+  expect(await card.get(index).isPresent()).to.be.true;
+});
+
+Then('Campaign: {string}, Card: {string} Should have a Percentage of Raised amount', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .card-info .percentes`));
+  await card.get(index).getText().then(text => {
+    console.error('Raised Percentage: ', text);
+    expect(text.length).to.be.gt(1)
+  });
+});
+
+Then('Campaign: {string}, Card: {string} Should have a Remaining Days', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .remaining-days span`));
+  type === 'active' ? (await card.get(index).getText().then(text => {
+    console.error('Remaining Days: ', text);
+    expect(text.length).to.be.gt(0)
+  })) : (expect(await card.isPresent()).to.be.false)
+});
+
+Then('Campaign: {string}, Card: {string} Should have a WhatsApp share option', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .social-btn a.wa i`));
+  type === 'active' ? 
+    (expect(await card.get(index).isPresent()).to.be.true) : (expect(await card.get(index).isPresent()).to.be.false);
+});
+
+Then('Campaign: {string}, Card: {string} Should have a FaceBook share option', async (type, index) => {
+  let ccEle = type === 'active' ? 'div#active_campaign' : 'div#completed_campaign';
+  let card = element.all(By.css(`${ccEle} campaign-card>div .social-btn a.fb i`));
+  type === 'active' ? 
+    (expect(await card.get(index).isPresent()).to.be.true) : (expect(await card.get(index).isPresent()).to.be.false);
 });
 
 When('Click on a campaign', async () => {
@@ -77,10 +167,10 @@ When('Click on a campaign', async () => {
 });
 
 Then('Verify all functionality in campaign card', async () => {
-  fn_activeCampaign('#active_campaign '); //pass the ID manually
+  //activeCampaign('#active_campaign '); //pass the ID manually
 });
 
-async function fn_activeCampaign(ID: string) {
+async function activeCampaign(ID: string) {
   console.log('Active campaign inside-->' + ID);
   let blogCard = element(By.css(ID + '.card_img_hover_sec'));
 
