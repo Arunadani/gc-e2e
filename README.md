@@ -1,13 +1,13 @@
 # GC e2e
-## Prequisites
+
+## Prerequisites
+
 - Install [node](https://nodejs.org)
-    
 - Install protractor
 
   `npm install -g protractor`
 
 - Install [chrome browser](https://www.google.com/chrome/)
-
 
 ## Steps to execute automation script
 
@@ -15,14 +15,14 @@
 
   `git clone git@github.com:Arunadani/gc-e2e.git`
 
-- Go to app repo 
+- Go to app repo
 
   `cd ./gc-e2e`
 
 - Install the app
-  
+
   `npm ci`
-  
+
 - To run automation script in staging
 
   `npm run test:staging`
@@ -34,7 +34,6 @@
 - To run automation script in locally
 
   `npm run test`
-
 
 ## OnError Debugging
 
@@ -50,4 +49,3 @@
 - Run this command to update webdriver-manager
 
   `node node_modules/protractor/bin/webdriver-manager update`
-

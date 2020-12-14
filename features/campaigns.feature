@@ -1,7 +1,7 @@
 Feature: Verify Campaign Page
 
   Scenario Outline: Verify "<type>" campaigns page components
-    When Click on Donate menu
+    When Navigate to Donate
     Then Should have "<type>" Campaign Tab
     Then Should have category filter checkbox
     Then Should have filter by time period
@@ -12,16 +12,16 @@ Feature: Verify Campaign Page
     Examples:
       | type      |
       | completed |
-      | active |
-
+      | active    |
+  @test
   Scenario Outline: Verify "<type>" Campaign Tab
     When Click on "<type>" Campaign Tab
     Then Should have "<type>" campaign cards
     Examples:
       | type      |
       | completed |
-      | active |
-
+      | active    |
+  @test
   Scenario Outline: Verify a "<type>" Campaign Card
     When Click on "<type>" Campaign Tab
     Then Should have "<type>" campaign cards
@@ -39,12 +39,12 @@ Feature: Verify Campaign Page
     Examples:
       | cardIndex | type      |
       | 1         | completed |
-      | 1         | active |
+      | 1         | active    |
 
 
   @test
-  Scenario: Veriy Active Campaigns sections
-    When Click on Donate menu
+  Scenario: Click on a Campaign Card
+    When Navigate to Donate
     Then Verify all functionality in campaign card
 
 

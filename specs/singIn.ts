@@ -34,9 +34,9 @@ Then("Click login button", async () => {
   await element(By.xpath(login.userLogin)).click();
   await browser.sleep(5000);
 
-  expect(
-    element(By.cssContainingText(".row h3", " User Dasboard")).isDisplayed()
-  ).to.exist;
+  await expect(
+    element(By.cssContainingText(".row h3", " User Dashboard")).isPresent()
+  ).to.eventually.true;
 });
 
 When("Click on Sign In menu", async () => {
@@ -45,7 +45,7 @@ When("Click on Sign In menu", async () => {
   await browser.sleep(2000);
 
   /*Check page loaded*/
-  expect(
+ await expect(
     element(
       By.cssContainingText(login.userCheckEle, login.userCheckFor)
     ).isPresent()
