@@ -15,12 +15,10 @@ let compId = "app-browse-campaign ";
 When("Navigate to Donate", async () => {
   console.log("donate menu click");
   await element(By.cssContainingText(".navbar-nav a", "Donate")).click();
-  await browser.sleep(2000);
+  await browser.sleep(5000);
   await expect(
     element(By.cssContainingText(".row h3", " Browse Campaigns")).isPresent()
-  );
-  //).to.eventually.true;
-  //await browser.sleep(5000);
+  ).to.eventually.true;
 });
 
 Then("Should have category filter checkbox", async () => {

@@ -3,7 +3,10 @@ Feature: Donate Test
 
   Scenario: Select an active campiagn from Donate page
     Given Navigate to Donate
-    When Click on Active Campaign
+    Then Should have "active" Campaign Tab
+    When Click on "active" Campaign Tab
+    Then Should have "active" campaign cards
+    # When Click on Active Campaign
     Then Click on a campaign card "3"
 
   Scenario: Enter the required fields in Donate Form
@@ -20,11 +23,15 @@ Feature: Donate Test
     Then Enter the card name
     And Enter the card number
     And Verify payment on "success"
-  @test
+
+
   Scenario Outline: Payment - Negative test cases
     Given Navigate to Donate
-    When Click on Active Campaign
-    Then Click on a campaign card "3"
+    #Then Refresh
+    Then Should have "active" Campaign Tab
+    When Click on "active" Campaign Tab
+    Then Should have "active" campaign cards
+    Then Click on a campaign card "1"
     # Enter the donate form details
     Then Select Currency as USD
     And Enter the amount

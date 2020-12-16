@@ -27,24 +27,22 @@ Then("click on static links {string}", async (nav) => {
   console.log("menu is--", nav);
 
   await verifyStaticLink(".single-footer-widget .list a", staticLinks[nav]);
-  //browser.sleep(20000);
   await browser.sleep(2000);
 });
 
 async function verifyStaticLink(parentEle, navObj) {
   await element(By.cssContainingText(parentEle, navObj.title)).click();
-  browser.sleep(2000);
+  await browser.sleep(10000);
 
   /* this if for only "home" menu*/
 
   if (navObj.checkFor == "null") {
-    await expect(element(By.css(navObj.checkEle)).isPresent()).to.eventually
-      .true;
+    await expect(element(By.css(navObj.checkEle)).isPresent()).to.exist;
   } else {
-    await expect(
-      element(
+    expect(
+      await element(
         By.cssContainingText(navObj.checkEle, navObj.checkFor)
       ).isPresent()
-    ).to.eventually.true;
+    ).to.be.true;
   }
 }

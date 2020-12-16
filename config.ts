@@ -27,15 +27,16 @@ export let config: Config = {
     },
   },
 
-  //specs: ["../*/*.feature"],
+  // specs: ["../*/*.feature"],
   specs: [
     "../*/header.feature",
     "../*/footer.feature",
     "../*/signIn.feature",
-    //"../*/donate.feature",
+    "../*/donate.feature",
     "../*/campaigns.feature",
     "../*/fundraiser.feature",
   ],
+  SELENIUM_PROMISE_MANAGER: false,
 
   cucumberOpts: {
     // ~@test - > tags will not execute

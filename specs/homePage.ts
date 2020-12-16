@@ -15,5 +15,5 @@ Given("Open homepage URL", async () => {
 
 Then("check logo present", async () => {
   //await expect(element(By.css(getEle("mainlogo"))).isDisplayed()).to.exist;
-  await expect(element(By.css(getEle("mainlogo"))).isPresent());
+  await expect(element(By.css(getEle("mainlogo"))).isPresent()).to.exist;
 });

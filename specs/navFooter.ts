@@ -58,8 +58,8 @@ Then("Click on {string} link in social media", async (socialNav) => {
         .then(() => {
           browser.driver.getCurrentUrl().then(function (url) {
             url = url.toLowerCase();
-            expect(url.includes(socialNav)).be.true;
-            // expect(url.includes("givecharity")).be.true;
+            // expect(url.includes(socialNav)).be.true;
+            expect(url.includes("givecharity")).be.true;
             browser.sleep(2000);
             browser.driver.close().then(function () {
               browser.sleep(2000);
@@ -77,7 +77,7 @@ Then("Click on {string} link in copyrights", async (nav) => {
   console.log("menu--", nav);
   let footer = footerLinks[nav];
 
-  await browser.sleep(3000);
+  await browser.sleep(5000);
   if (footer.checkFor == "null") {
     expect(
       element(By.cssContainingText(footer.clickOn, footer.checkEle)).isPresent()
@@ -88,7 +88,7 @@ Then("Click on {string} link in copyrights", async (nav) => {
       By.cssContainingText(footer.clickOn, footer.checkEle)
     ).click();
     // element(By.cssContainingText(footer.clickOn, footer.checkEle)).click();
-    await browser.sleep(2000);
+    await browser.sleep(5000);
     await browser.getAllWindowHandles().then(function (guids) {
       if (guids.length > 1) {
         console.log("Length of guid-->", guids.length);
@@ -96,12 +96,12 @@ Then("Click on {string} link in copyrights", async (nav) => {
           .switchTo()
           .window(guids[1])
           .then(() => {
-            browser.driver.getCurrentUrl().then(function (url) {
+            browser.driver.getCurrentUrl().then(async (url) => {
               url = url.toLowerCase();
-              expect(url.includes(footer.checkFor)).be.true;
+              await expect(url.includes(footer.checkFor)).be.true;
               // expect(url.includes("givecharity")).be.true;
-              browser.sleep(2000);
-              browser.driver.close().then(function () {
+              await browser.sleep(2000);
+              await browser.driver.close().then(function () {
                 browser.sleep(2000);
                 console.log("going to home window");
                 browser.switchTo().window(guids[0]);
