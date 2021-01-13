@@ -1,30 +1,46 @@
 
 Feature: Donate Test
 
+
   Scenario: Select an active campiagn from Donate page
     Given Navigate to Donate
     Then Should have "active" Campaign Tab
     When Click on "active" Campaign Tab
     Then Should have "active" campaign cards
-    # When Click on Active Campaign
-    Then Click on a campaign card "3"
+    Then Click on a campaign card "0"
 
   Scenario: Enter the required fields in Donate Form
     Then Select Currency as USD
-    And Enter the amount
-    Then Enter first name
+    And Enter the amount "3"
+    Then Enter first name "Joel"
     And Enter email
     Then Select country code
     Then Enter phone number
+    And Is Anonymous field present?
     And Click on Proceed to Pay
 
   Scenario: Payment: Enter Credit cards details
     Then Check Payment section is present?
     Then Enter the card name
     And Enter the card number
-    And Verify payment on "success"
+    And Click donate & Verify payment on "success"
+
+  Scenario Outline: Verify successful donation
+    Given Navigate to Donate
+    Then Should have "active" Campaign Tab
+    When Click on "active" Campaign Tab
+    Then Should have "active" campaign cards
+    Then Click on a campaign card "0"
+
+    And is Donorlist field present?
+    Then is donor "<name>" displayed correctly?
+
+    Examples:
+      | name      |
+      | Anonymous |
 
 
+  @stop
   Scenario Outline: Payment - Negative test cases
     Given Navigate to Donate
     #Then Refresh

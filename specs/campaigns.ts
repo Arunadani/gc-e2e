@@ -62,9 +62,11 @@ When("Click on {string} Campaign Tab", async (type) => {
 Then("Should have {string} campaign cards", async (type) => {
   let ccEle =
     type === "active" ? "div#active_campaign" : "div#completed_campaign";
-  expect(
-    await element.all(By.css(`${ccEle} campaign-card`)).count()
-  ).to.be.above(1);
+  await browser.sleep(2000);
+  let list_card = element.all(By.css(`${ccEle} campaign-card`));
+  list_card.count().then(function (cardsNum) {
+    expect(cardsNum).to.be.at.least(1);
+  });
 });
 
 Then(

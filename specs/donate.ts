@@ -1,3 +1,4 @@
+import { doesNotReject } from "assert";
 import { Then, When } from "cucumber";
 
 import { browser, element, By, protractor } from "protractor";
@@ -35,22 +36,22 @@ When("Select Currency as USD", async () => {
   await browser.sleep(2000);
 });
 
-Then("Enter the amount", async () => {
+Then("Enter the amount {string}", async (amountVal) => {
   let amount = element(By.xpath(donate.amount));
   await expect(amount.isPresent()).to.eventually.true;
-  await amount.sendKeys("10");
+  await amount.sendKeys(amountVal);
 });
 
-Then("Enter first name", async () => {
+Then("Enter first name {string}", async (firstName) => {
   let name = element(By.xpath(donate.firstName));
   await expect(name.isPresent()).to.eventually.true;
-  await name.sendKeys("John");
+  await name.sendKeys(firstName);
 });
 
 Then("Enter email", async () => {
   let email = element(By.xpath(donate.email));
   await expect(email.isPresent()).to.eventually.true;
-  await email.sendKeys("arunarose@gmail.com");
+  await email.sendKeys("abc@gmail.com");
 });
 
 Then("Select country code", async () => {
@@ -66,12 +67,19 @@ Then("Enter phone number", async () => {
   await mobileNum.sendKeys("1234567841");
 });
 
+Then("Is Anonymous field present?", async () => {
+  let anonymous_donor = element(By.id("anonymousDonor"));
+  await expect(anonymous_donor.isPresent()).to.eventually.true;
+  await anonymous_donor.click();
+  await browser.sleep(5000);
+});
+
 Then("Click on Proceed to Pay", async () => {
   let pay = element(By.partialButtonText("Pay"));
   await expect(pay.isPresent()).to.eventually.true;
   await browser.sleep(2000);
   await pay.click();
-  await browser.sleep(2000);
+  await browser.sleep(5000);
 });
 
 Then("Check Payment section is present?", async () => {
@@ -97,12 +105,24 @@ Then("Enter the card number", async () => {
   await browser.sleep(2000);
   await element(By.name(donate.zip)).sendKeys("630501");
   await browser.sleep(2000);
-  fn_homeFrame();
+  await browser.switchTo().defaultContent();
+  //fn_homeFrame();
+  await browser.sleep(5000);
 });
 
-Then("Verify payment on {string}", async (toast) => {
+Then("Click donate & Verify payment on {string}", async (toast) => {
+  //fn_donate(toast);
   await browser.sleep(5000);
-  fn_donate(toast);
+  let orgdonor = element(By.partialButtonText("Donate"));
+  await orgdonor.click();
+  await browser.sleep(30000);
+
+  await expect(
+    element(
+      By.cssContainingText(".card-title", "PAYMENT DONE SUCCESSFULLY")
+    ).isPresent()
+  ).to.exist;
+  await browser.sleep(10000);
 });
 
 Then("Enter the wrong card name {string}", async (string) => {
@@ -111,7 +131,7 @@ Then("Enter the wrong card name {string}", async (string) => {
   await name.sendKeys(string);
   await browser.sleep(2000);
   if (string != "test") {
-    fn_toastError(".error");
+    //fn_toastError(".error");
   }
   await browser.sleep(2000);
 });
@@ -146,32 +166,28 @@ Then(
   }
 );
 
-function fn_toastError(checkEle) {
-  browser.sleep(2000);
-  expect(element(By.css(checkEle)).isDisplayed()).to.eventually.true;
+Then("is Donorlist field present?", async () => {
+  let donors = element(By.css(".widget-title h2"));
+  await expect(donors.isPresent()).to.eventually.true;
+  await browser.sleep(2000);
+});
+
+Then("is donor {string} displayed correctly?", async (name) => {
+  let donor_nameList = element.all(By.css(".donner-name span"));
+  donor_nameList
+    .get(0)
+    .getText()
+    .then(function (text) {
+      console.log("donorname--->" + text);
+      expect(text).to.contain(name);
+    });
+  await browser.sleep(5000);
+});
+
+async function fn_homeFrame() {
+  await browser.switchTo().defaultContent();
 }
 
-function fn_homeFrame() {
-  browser.switchTo().defaultContent();
-  browser.sleep(5000);
-}
-
-async function fn_donate(type) {
-  await browser.sleep(5000);
-  let donate = element(By.css(".forward"));
-  await expect(donate.isPresent()).to.eventually.true;
-  await donate.click();
-  await browser.sleep(5000);
-  if (type == "success") {
-    await expect(element(By.css(".payment_success_msg card")).isDisplayed()).to
-      .be.true;
-  } else {
-    await expect(
-      await element(By.css(".payment_success_msg card")).isDisplayed()
-    ).to.be.false;
-  }
-  await browser.sleep(10000);
-}
 function fn_tab() {
   browser.actions().sendKeys(protractor.Key.TAB).perform();
 }

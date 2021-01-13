@@ -4,7 +4,7 @@ Feature: gc-e2e Header Test
     Given Open homepage URL
     Then check logo present
 
-
+  @stop
   Scenario Outline: Verify header links
     Then click on header links "<header>"
     Examples:
