@@ -40,6 +40,13 @@ Then("Enter the amount {string}", async (amountVal) => {
   let amount = element(By.xpath(donate.amount));
   await expect(amount.isPresent()).to.eventually.true;
   await amount.sendKeys(amountVal);
+  await browser.sleep(5000);
+});
+Then("Select transcation fee", async () => {
+  let transferFee = element(By.xpath("//input[@formcontrolname='transactionFee']"));
+  await expect(transferFee.isPresent()).to.eventually.true;
+  await transferFee.click();
+  await browser.sleep(5000);
 });
 
 Then("Enter first name {string}", async (firstName) => {

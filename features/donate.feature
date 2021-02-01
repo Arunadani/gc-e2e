@@ -9,9 +9,10 @@ Feature: Donate Test
     Then Should have "active" campaign cards
     Then Click on a campaign card "0"
 
-  Scenario: Enter the required fields in Donate Form
+  Scenario: Fill the form with Transcation fee & Anonymous features
     Then Select Currency as USD
     And Enter the amount "3"
+    And Select transcation fee
     Then Enter first name "Joel"
     And Enter email
     Then Select country code
@@ -19,12 +20,14 @@ Feature: Donate Test
     And Is Anonymous field present?
     And Click on Proceed to Pay
 
+  
   Scenario: Payment: Enter Credit cards details
     Then Check Payment section is present?
     Then Enter the card name
     And Enter the card number
     And Click donate & Verify payment on "success"
 
+  @stop
   Scenario Outline: Verify successful donation
     Given Navigate to Donate
     Then Should have "active" Campaign Tab
