@@ -32,7 +32,7 @@ export let config: Config = {
     "../*/header.feature",
     // "../*/footer.feature",
     //"../*/signIn.feature",
-    "../*/donate.feature",
+   // "../*/donate.feature",
     //"../*/campaigns.feature",
     //"../*/fundraiser.feature",
   ],
