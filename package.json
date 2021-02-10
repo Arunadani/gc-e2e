@@ -7,10 +7,12 @@
     "pretest": "npm run tsc",
     "pretest:staging": "npm run tsc",
     "pretest:qa": "npm run tsc",
+    "pretest:prod": "npm run tsc",
     "tsc": "tsc",
     "test": "protractor ./build/config.js",
     "test:staging": "protractor ./build/config.js --env=staging",
-    "test:qa": "protractor ./build/config.js --env=qa"
+    "test:qa": "protractor ./build/config.js --env=qa",
+    "test:prod": "protractor ./build/config.js --env=prod"
   },
   "repository": {
     "type": "git",

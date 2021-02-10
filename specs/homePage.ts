@@ -46,8 +46,9 @@ Then("is all menus displayed?", async () => {
 function checkAssert(ele, expected)
 {
   ele.count().then (async(num)=>{
-    console.log("count-->"+num);
+   // console.log("count-->"+num);
     await expect(num).to.eql(expected);
+    //await assert.equal(num,expected);
     browser.sleep(2000);
    return true;
   })

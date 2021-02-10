@@ -6,6 +6,7 @@ const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.use(require("chai-dom"));
 const expect = chai.expect;
+const assert = chai.assert;
 
 var longWait = 20000;
 var shortWait = 10000;
@@ -22,13 +23,13 @@ When("Navigate to Donate", async () => {
 });
 
 Then("Should have category filter checkbox", async () => {
-  expect(await element.all(By.css(compId + " .boxes .btn")).count()).to.equal(
-    8
+  await expect(await element.all(By.css(compId + " .boxes .btn")).count()).to.equal(
+    6
   );
 });
 
 Then("Should have filter by time period", async () => {
-  expect(element(By.css(compId + "#cat")).isPresent()).to.eventually.true;
+  await expect(element(By.css(compId + "#cat")).isPresent()).to.eventually.true;
 });
 
 Then("Should have 4 options in time period filter", async () => {
@@ -36,27 +37,27 @@ Then("Should have 4 options in time period filter", async () => {
 });
 
 Then("Should have Search input field", async () => {
-  expect(element(By.css(compId + "input#table_filter")).isPresent()).to
+  await expect(element(By.css(compId + "input#table_filter")).isPresent()).to
     .eventually.true;
 });
 
 Then("Should have Search button", async () => {
-  expect(element(By.css(compId + "button#searchBtn")).isPresent()).to.eventually
+  await expect(element(By.css(compId + "button#searchBtn")).isPresent()).to.eventually
     .true;
 });
 
 Then("Should have {string} Campaign Tab", async (type) => {
   let ccEle =
     type === "active" ? "a#ongoing_campaignId" : "a#completed_campaignId";
-  expect(element(By.css(`${compId} ${ccEle}`)).isPresent()).to.eventually.true;
+  await expect(element(By.css(`${compId} ${ccEle}`)).isPresent()).to.eventually.true;
 });
 
 When("Click on {string} Campaign Tab", async (type) => {
   let ccEle =
     type === "active" ? "a#ongoing_campaignId" : "a#completed_campaignId";
   element(By.css(`${compId} ${ccEle}`)).click();
-  expect(element(By.css(`${compId} ${ccEle}.active`)).isPresent()).to.eventually
-    .true;
+ await expect(element(By.css(`${compId} ${ccEle}.active`)).isPresent()).to.exist;
+    
 });
 
 Then("Should have {string} campaign cards", async (type) => {
@@ -64,10 +65,39 @@ Then("Should have {string} campaign cards", async (type) => {
     type === "active" ? "div#active_campaign" : "div#completed_campaign";
   await browser.sleep(2000);
   let list_card = element.all(By.css(`${ccEle} campaign-card`));
-  list_card.count().then(function (cardsNum) {
-    expect(cardsNum).to.be.at.least(1);
+  list_card.count().then(async (cardsNum) =>{
+    await expect(cardsNum).to.be.at.least(1);
   });
 });
+Then('Check {string} pagination & functionality', async (type) =>{
+  let ccEle =
+  type === "active" ? "#active_campaign" : "#completed_campaign";
+await browser.sleep(2000);
+
+let pageNum= 0;
+console.log("type-->"+ccEle);   
+let pageEle = element.all(By.css(`${ccEle}  li`));
+await pageEle.count().then(async(totalPage)=>{
+      for(totalPage>1;pageNum<(totalPage-1);pageNum++)
+        {
+         console.log("pageNumInex"+pageNum, "of"+totalPage);
+         await pageEle.get(pageNum).click();
+         await browser.sleep(10000);
+         await element.all(By.css(`${ccEle}  .team-block`)).count().then(async(cardCount)=>{
+          console.log("cardCount-->"+cardCount);
+           if(pageNum==0 )
+           {await  expect (cardCount).to.be.equal(9);
+            
+            return;}
+           else if(pageNum==1)
+           { 
+             await expect (cardCount).to.be.lt(9);
+             return;}
+             
+          return;
+          
+         });
+        } }); });
 
 Then(
   "Campaign: {string}, Card: {string} Should have a title",
@@ -79,8 +109,10 @@ Then(
       .get(index)
       .getText()
       .then((text) => {
-        console.error("Title: ", text);
-        expect(text.length).to.be.gt(1);
+        console.error("Title: <------>", text);
+        //expect(text.length).to.be.gt(1);
+        //console.log("Expect len-->"+text.length);
+        //expect(text.length).to.have.lengthOf.above(2);
       });
   }
 );

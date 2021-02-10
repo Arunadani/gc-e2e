@@ -13,15 +13,16 @@ Feature: Verify Campaign Page
       | type      |
       | completed |
       | active    |
-  @test
+  
   Scenario Outline: Verify "<type>" Campaign Tab
     When Click on "<type>" Campaign Tab
     Then Should have "<type>" campaign cards
+    And Check "<type>" pagination & functionality
     Examples:
       | type      |
       | completed |
       | active    |
-  @test
+  @stop
   Scenario Outline: Verify a "<type>" Campaign Card
     When Click on "<type>" Campaign Tab
     Then Should have "<type>" campaign cards

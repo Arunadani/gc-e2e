@@ -33,7 +33,7 @@ export let config: Config = {
     // "../*/footer.feature",
     //"../*/signIn.feature",
    // "../*/donate.feature",
-    //"../*/campaigns.feature",
+    "../*/campaigns.feature",
     //"../*/fundraiser.feature",
   ],
   SELENIUM_PROMISE_MANAGER: false,
