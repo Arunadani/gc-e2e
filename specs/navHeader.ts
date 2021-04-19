@@ -1,5 +1,6 @@
 import { Then, When } from "cucumber";
 import { browser, element, By, ExpectedConditions } from "protractor";
+import staticLinks from "../helper/staticLinks.json";
 
 const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
@@ -7,18 +8,15 @@ chai.use(chaiAsPromised);
 chai.use(require("chai-dom"));
 const expect = chai.expect;
 
-import staticLinks from "../helper/staticLinks.json";
 
 Then("click on header links {string}", async (navLn) => {
   console.log("header--", navLn);
 
   if (navLn == "signIn") {
-    await verifyStaticLink(".login-box-top a", staticLinks[navLn]);
-    //browser.sleep(10000);
+    await verifyStaticLink(".login-box-top a", staticLinks[navLn]); 
     await browser.sleep(2000);
   } else {
     await verifyStaticLink(".navbar-nav a", staticLinks[navLn]);
-    //browser.sleep(10000);
     await browser.sleep(2000);
   }
 });

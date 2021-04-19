@@ -15,7 +15,6 @@ Given("Open homepage URL", async () => {
 });
 
 Then("check logo present", async () => {
-  //await expect(element(By.css(getEle("mainlogo"))).isDisplayed()).to.exist;
   await expect(element(By.css(getEle("mainlogo"))).isPresent()).to.exist;
 });
 Then("is all menus displayed?", async () => {
@@ -45,10 +44,8 @@ Then("is all menus displayed?", async () => {
 
 function checkAssert(ele, expected)
 {
-  ele.count().then (async(num)=>{
-   // console.log("count-->"+num);
-    await expect(num).to.eql(expected);
-    //await assert.equal(num,expected);
+  ele.count().then (async(num)=>{  
+    await expect(num).to.eql(expected);   
     browser.sleep(2000);
    return true;
   })

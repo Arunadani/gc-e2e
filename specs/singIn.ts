@@ -26,22 +26,24 @@ Given("Click on logout", async () => {
   element(By.css(login.userProfile)).click();
   await browser.sleep(1000);
   element(By.xpath(login.userLogout)).click();
-  await browser.sleep(2000);
+  await browser.sleep(5000);
 });
 
 Then("Click login button", async () => {
   /*Enter Login*/
-  await element(By.xpath(login.userLogin)).click();
-  await browser.sleep(5000);
-
-  await expect(
-    element(By.cssContainingText(".row h3", " User Dashboard")).isPresent()
-  ).to.eventually.true;
+  let loginBtn =  element(By.xpath(login.userLogin));
+  loginBtn.isEnabled().then(function(){
+    loginBtn.click();
+  })  
+  await browser.sleep(8000); 
 });
 
 When("Click on Sign In menu", async () => {
   /*Click on signin*/
-  await element(By.cssContainingText(getEle("loginEle"), "Sign In")).click();
+  let signInMenu=element(By.cssContainingText(getEle("loginEle"), "Sign In"))
+  await signInMenu.isPresent().then(function(){
+    signInMenu.click();
+  })
   await browser.sleep(2000);
 
   /*Check page loaded*/
@@ -54,17 +56,17 @@ When("Click on Sign In menu", async () => {
   await browser.sleep(2000);
 });
 Then("Enter correct email and password", async () => {
-  /*enter username*/
+
   email.sendKeys("anshcardinal@gmail.com");
   await browser.sleep(3000);
-  /*enter password*/
+
   password.sendKeys("Putrajay4");
   await browser.sleep(2000);
 });
 
 Then("Enter only password", async () => {
   /*enter password*/
-  password.sendKeys("Putrajay4");
+  password.sendKeys("password");
   await browser.sleep(2000);
 });
 
@@ -73,12 +75,51 @@ Then("Enter wrong email", async () => {
 });
 Then("Enter only email", async () => {
   /*enter email*/
-  email.sendKeys("anshcardinal@gmail.com");
+  email.sendKeys("arunarose@gmail.com");
   await browser.sleep(2000);
 });
-Then("Enter wrong password", async () => {
+Then("Enter correct username & wrong password", async () => {
+  email.sendKeys("anshcardinal@gmail.com");
+  await browser.sleep(3000);
   password.sendKeys("11");
+  await browser.sleep(3000);
 });
-Then("Enter unregistered email", async () => {
-  email.sendKeys("abc@gmail.com");
+Then("Enter unregistered email & password", async () => {
+  email.sendKeys("anu@gmail.com");
+  await browser.sleep(3000);
+  password.sendKeys("11");
+  await browser.sleep(3000);
 });
+Then ("Check toast message {string}",async (toast) => {
+    switch(toast)
+  {
+    case "pass": expect(element(By.cssContainingText(".row h3", " User Dashboard")).isPresent()).to.exist;
+    break;
+
+    case "fail":element(By.xpath("//div[@aria-label='Invalid credentials.']")).isDisplayed().then(function(text){
+      console.log("Toast message",text);
+    });
+    break;
+
+    default: console.log("===>login button not enabled");
+  }
+});
+function toast(toast)
+{  
+  if (toast=="pass") 
+  {
+     expect(
+      element(By.cssContainingText(".row h3", " User Dashboard")).isPresent()
+    ).to.exist;
+  }
+  else if(toast=="fail")
+  {
+  element(By.xpath("//div[@aria-label='Invalid credentials.']")).isDisplayed().then(function(text){
+  console.log("Toast message",text); 
+  });
+ }
+ else
+ {
+   console.log("LOGIN BUTTON - NOY ENABLED")
+ }
+}

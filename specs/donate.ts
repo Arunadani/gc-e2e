@@ -118,18 +118,32 @@ Then("Enter the card number", async () => {
 });
 
 Then("Click donate & Verify payment on {string}", async (toast) => {
-  //fn_donate(toast);
+
   await browser.sleep(5000);
   let orgdonor = element(By.partialButtonText("Donate"));
   await orgdonor.click();
-  await browser.sleep(30000);
+ 
+  switch (toast)
+  {
+    case "success":
+      await browser.sleep(30000);
+      await expect(
+        element(
+          By.cssContainingText(".card-title", "PAYMENT DONE SUCCESSFULLY")
+        ).isDisplayed()
+      ).to.exist;
+      await browser.sleep(10000);
+      break;
+1
+      case "failure":
+       await browser.sleep(5000);
+        expect(
+        element(By.cssContainingText(".toast-title", "PAYMENT FAILED")
+        ).isPresent()).to.exist;
+        break;       
 
-  await expect(
-    element(
-      By.cssContainingText(".card-title", "PAYMENT DONE SUCCESSFULLY")
-    ).isPresent()
-  ).to.exist;
-  await browser.sleep(10000);
+        default: console.log("PAYMENT ERROR");
+  }  
 });
 
 Then("Enter the wrong card name {string}", async (string) => {

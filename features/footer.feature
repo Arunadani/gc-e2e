@@ -6,6 +6,7 @@ Feature: Footer Test
         Then Check all footer sections present?
         Then Check is copyright area present?
 
+
     Scenario Outline: Verify copyright section
         Then Click on "<crNav>" link in copyrights
 
@@ -27,6 +28,7 @@ Feature: Footer Test
             | instagram |
             | linkedin  |
             | whatsapp  |
+
 
     Scenario Outline: Verify footer links
         Then click on static links "<footer>"

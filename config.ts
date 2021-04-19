@@ -30,17 +30,18 @@ export let config: Config = {
   // specs: ["../*/*.feature"],
   specs: [
     "../*/header.feature",
-    // "../*/footer.feature",
-    //"../*/signIn.feature",
-   // "../*/donate.feature",
+   "../*/footer.feature",
+    "../*/signIn.feature",
+    "../*/donate.feature",
     "../*/campaigns.feature",
-    //"../*/fundraiser.feature",
+   "../*/fundraiser.feature",
   ],
   SELENIUM_PROMISE_MANAGER: false,
 
   cucumberOpts: {
     // ~@test - > tags will not execute
-    tags: "~@stop",
+    tags: ["~@stop"],
+    //,"~@N_test"],
     format: "json:./cucumberTestReport.json",
     require: [
       "./specs/*.js", // accepts a glob

@@ -6,12 +6,8 @@ import {
   By,
   ExpectedConditions,
 } from "protractor";
-
-import staticLinks from "../helper/staticLinks.json";
 import footerLinks from "../helper/footerLinks.json";
 import { getEle } from "../helper/gcHelper";
-import { SSL_OP_EPHEMERAL_RSA } from "constants";
-import { getUnpackedSettings } from "http2";
 
 let footer = getEle("footer");
 
@@ -87,8 +83,7 @@ Then("Click on {string} link in copyrights", async (nav) => {
     await element(
       By.cssContainingText(footer.clickOn, footer.checkEle)
     ).click();
-    // element(By.cssContainingText(footer.clickOn, footer.checkEle)).click();
-    await browser.sleep(5000);
+     await browser.sleep(5000);
     await browser.getAllWindowHandles().then(function (guids) {
       if (guids.length > 1) {
         console.log("Length of guid-->", guids.length);

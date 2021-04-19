@@ -43,7 +43,7 @@ Feature: Verify Campaign Page
       | 1         | active    |
 
 
-  @test
+  @stop
   Scenario: Click on a Campaign Card
     When Navigate to Donate
     Then Verify all functionality in campaign card
