@@ -18,6 +18,8 @@ export let config: Config = {
     browserName: "chrome",
     chromeOptions: {
       args: [
+        "--headless", 
+        "--disable-gpu",
         "--no-sandbox",
         "--disable-dev-shm-usage",
         "--disable-blink-features",
