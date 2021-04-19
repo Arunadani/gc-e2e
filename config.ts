@@ -20,6 +20,7 @@ export let config: Config = {
       args: [
         "--headless", 
         "--disable-gpu",
+        "--window-size=800x600",
         "--no-sandbox",
         "--disable-dev-shm-usage",
         "--disable-blink-features",
