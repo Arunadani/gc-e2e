@@ -1,5 +1,5 @@
 const gc = {
-  mainlogo: ".logo.hide-xs .logo-default",
+  mainlogo: ".logo-default",
   loginEle: ".login-box-top a",
 
   navheader: {
@@ -28,37 +28,39 @@ const gc = {
   donate: {
     menu: ".navbar-nav a",
     campaignActive: "#ongoing_campaignId",
-    //currency: "//select[formcontrolname='currency']",
-    amount: "//input[@formcontrolname='amount']",
+    currency: '//*[@formcontrolname="currency"]',
+    amount: '//*[@formcontrolname="amount"]',
+    transaction_fee: "//input[@formcontrolname='transactionFee']",
     firstName: "//input[@formcontrolname='firstName']",
     email: "//input[@formcontrolname='emailId']",
     countryCode: "#mobileExtensionDonor",
     mobileNum: "//input[@formcontrolname='mobileNo']",
     payMode: ".donate-sec",
+    pay_btn: "Proceed",
     cardName: "//input[@formcontrolname='cardName']",
     cardNum: "cardnumber",
-    expDate: "exp-date",
-    cvc: "cvc",
+    expDate: "//input[@name='exp-date']",
+    cvc: "//input[@name='cvc']",
     zip: "postal",
   },
-  card: {
-    name: "Test",
-    Num: "4242424242424242",
-    monthYear: "0525",
-    cvc: "111",
-  },
-  toast:
-  {
-name:"//input[@formcontrolname='cardName']",
-nameError:"Invalid Card Name",
-num:".toast-error",
-numError:"incomplete"
-//ardError:".toast-error"
-
+  toast: {
+    name: "//input[@formcontrolname='cardName']",
+    nameError: "Invalid Card Name",
+    num: ".toast-error",
+    numError: "incomplete",
+    //ardError:".toast-error"
   },
   proxy: {
     user: "gcadmin",
     pwd: "tigerhill2020",
+  },
+  config_data: {
+    email: "abc@gmail.com",
+    phone: "1234567891",
+    name: "Test",
+    Num: "4242424242424242",
+    monthYear: "0525",
+    cvc: "111",
   },
 };
 export function getEle(type: any) {

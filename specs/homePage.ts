@@ -6,7 +6,7 @@ const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 chai.use(require("chai-dom"));
 const expect = chai.expect;
-const assert = chai.assert;
+
 
 Given("Open homepage URL", async () => {
   // await browser.get("https://gcadmin:tigerhill2020@qa.givecharity.org");
@@ -15,7 +15,9 @@ Given("Open homepage URL", async () => {
 });
 
 Then("check logo present", async () => {
-  await expect(element(By.css(getEle("mainlogo"))).isPresent()).to.exist;
+  await element(By.css(getEle("mainlogo"))).isPresent().then((flag)=>{
+    expect(flag).to.be.true;
+  });
 });
 Then("is all menus displayed?", async () => {
   

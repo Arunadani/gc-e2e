@@ -18,8 +18,8 @@ export let config: Config = {
     browserName: "chrome",
     chromeOptions: {
       args: [
-        "--headless", 
-        "--disable-gpu",
+        //"--headless", 
+        //"--disable-gpu",
         "--window-size=800x600",
         "--no-sandbox",
         "--disable-dev-shm-usage",
@@ -34,10 +34,11 @@ export let config: Config = {
   specs: [
     "../*/header.feature",
    "../*/footer.feature",
-    "../*/signIn.feature",
-    "../*/donate.feature",
+    //"../*/signIn.feature",
+    //"../*/donate.feature",
     //"../*/campaigns.feature",
    //"../*/fundraiser.feature",
+   //Don't run this "../*/apitesting.feature"
   ],
   SELENIUM_PROMISE_MANAGER: false,
 
@@ -50,11 +51,11 @@ export let config: Config = {
       "./specs/*.js", // accepts a glob
     ],
   },
+ 
   onPrepare: async () => {
     console.log("onPrepare");
     await browser.manage().window().maximize();
     browser.manage().timeouts().implicitlyWait(5000);
-    //browser.ig = false;
     browser.waitForAngularEnabled(false);
     await browser.get(baseUrl);
     await browser.sleep(10000);
