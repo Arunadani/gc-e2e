@@ -14,6 +14,11 @@ export let config: Config = {
   frameworkPath: require.resolve("protractor-cucumber-framework"),
 
   // Capabilities to be passed to the webdriver instanace.
+  /*multiCapabilities: [{
+    'browserName': 'firefox'
+  }, {
+    'browserName': 'chrome'
+  }],*/
   capabilities: {
     browserName: "chrome",
     chromeOptions: {
@@ -33,12 +38,13 @@ export let config: Config = {
   // specs: ["../*/*.feature"],
   specs: [
     "../*/header.feature",
-   "../*/footer.feature",
+   //"../*/footer.feature",
     //"../*/signIn.feature",
     //"../*/donate.feature",
     //"../*/campaigns.feature",
    //"../*/fundraiser.feature",
-   //Don't run this "../*/apitesting.feature"
+   //Don't run this "..
+   //"../*/apitesting.feature"
   ],
   SELENIUM_PROMISE_MANAGER: false,
 
@@ -51,7 +57,7 @@ export let config: Config = {
       "./specs/*.js", // accepts a glob
     ],
   },
- 
+/* 
   onPrepare: async () => {
     console.log("onPrepare");
     await browser.manage().window().maximize();
@@ -59,7 +65,7 @@ export let config: Config = {
     browser.waitForAngularEnabled(false);
     await browser.get(baseUrl);
     await browser.sleep(10000);
-  },
+  },*/
   onComplete: () => {
     console.log("onComplete");
     var options = {
