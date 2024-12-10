@@ -1,0 +1,10 @@
+name: run-automation-test
+on:  workflow_dispatch
+jobs:
+  firstJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: gretting
+      - run: echo "Hello world"
+      - name: good bye
+      - run: echo "Done - bye"
